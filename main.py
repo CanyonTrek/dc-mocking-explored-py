@@ -6,7 +6,7 @@ def main():
     tfl = TextFileSource()
 
     # Set file name
-    fname = "data.txt" #C:\\tmp\\KeyboardHandler.txt"
+    fname = "data.txt" # "C:\\tmp\\KeyboardHandler.txt"
 
     # Define a lambda-like function to append the line to the list
     line_collector = lambda collection, line: collection + [line] 
