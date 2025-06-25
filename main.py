@@ -1,17 +1,28 @@
-from app.text_file_loader import TextFileLoader
+from app.text_file_source import TextFileSource
+from app.data_loader import DataLoader
 
 def main():
-    tfl = TextFileLoader()
+    # Create a TextFileSource instance
+    tfl = TextFileSource()
+
+    # Set file name
+    fname = "data.txt" #C:\\tmp\\KeyboardHandler.txt"
 
     # Define a lambda-like function to append the line to the list
-    line_collector = lambda collection, line: collection.append(line)
+    line_collector = lambda collection, line: collection + [line] 
 
-    # Load the file with the processing function
-    lines = tfl.load_file("C:/tmp/KeyboardHandler.txt", line_collector)
+    # Load data using the source and line processor
+    lines = tfl.load_data(fname, line_collector)
 
-    # Print the lines with a prefix
+    # Print each line
     for element in lines:
         print(f">> {element}")
+
+    # Use the DataLoader to count characters
+    dl = DataLoader(tfl)
+    no_of_chars = dl.load_data(fname)
+
+    print(f"No of characters in the file are: {no_of_chars}")
 
 if __name__ == "__main__":
     main()
