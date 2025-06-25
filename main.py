@@ -7,7 +7,7 @@ def main():
     line_collector = lambda collection, line: collection.append(line)
 
     # Load the file with the processing function
-    lines = tfl.load_file("C:/tmp/KeyboardHandler.java.txt", line_collector)
+    lines = tfl.load_file("C:/tmp/KeyboardHandler.txt", line_collector)
 
     # Print the lines with a prefix
     for element in lines:
