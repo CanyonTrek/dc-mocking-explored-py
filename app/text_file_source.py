@@ -2,35 +2,36 @@ import logging
 
 class TextFileSource:
     """
-    A data source class that loads data from a text file and allows external logic
-    to process each line using a provided function.
-
-    This abstracts away the file reading mechanism and decouples it from how
-    the data is processed.
+    A data source class that loads data from a text file and uses a processing function
+    to transform or collect the data. Supports both single and dual parameter variants
+    like the Java generic interface.
     """
 
-    def load_data(self, fname, line_processor=None):
+    def load_data(self, fname, lines=None, line_processor=None):
         """
-        Loads lines from the given file and applies the line_processor to each line.
+        Load data from a file using a line processor. Can be called with just the filename,
+        or with a pre-initialized collection and processor function.
 
         Parameters:
-        - fname: Path to the file to be read.
-        - line_processor: A function that accepts (list, line) to process each line.
+        - fname: str - The filename to read.
+        - collection: list or custom object - Optional collection to store results.
+        - processor: function - Optional function of form (collection, line) -> collection
 
         Returns:
-        - A list of processed lines.
+        - A list or processed object.
         """
-        # If no processor is provided, use a default that appends each stripped line
+        if lines is None:
+            lines = []
+
         if line_processor is None:
-            line_processor = lambda col, line: col + [line]
+            line_processor = lambda col, line: col + [line]  # Default: append line to list
 
-
-        lines = []
         try:
             with open(fname, "r", encoding="utf-8") as file:
                 for line in file:
                     lines = line_processor(lines, line.strip())
         except IOError as ex:
             logging.error("Error reading file %s: %s", fname, ex)
+
         return lines
 
