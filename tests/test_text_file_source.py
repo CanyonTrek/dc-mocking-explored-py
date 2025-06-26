@@ -7,7 +7,7 @@ class TestTextFileSource(unittest.TestCase):
         Demonstrates usage of TextFileSource.load_data() with a single filename parameter.
         """
         tfl = TextFileSource()
-        fname = "C:\\tmp\\KeyboardHandler.java.txt"
+        fname = "data.txt" # "C:\\tmp\\KeyboardHandler.java.txt"
         lines = tfl.load_data(fname)
 
         for element in lines:
@@ -19,7 +19,7 @@ class TestTextFileSource(unittest.TestCase):
         and line processor function.
         """
         tfl = TextFileSource()
-        fname = "C:\\tmp\\KeyboardHandler.java.txt"
+        fname = "data.txt" # "C:\\tmp\\KeyboardHandler.java.txt"
         data = []
 
         # Define lambda equivalent for line processor
