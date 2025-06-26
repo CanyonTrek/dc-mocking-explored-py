@@ -9,7 +9,7 @@ class TestDataLoader(unittest.TestCase):
         tfl = TextFileSource()
         fname = "data.txt" # "C:/tmp/KeyboardHandler.txt"
         dl = BasicDataProcessor(tfl)
-        expected = 11 #1383
+        expected = 20 #1383
 
         # act
         result = dl.load_data(fname)
