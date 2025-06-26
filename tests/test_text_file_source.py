@@ -52,6 +52,26 @@ class TestTextFileSource(unittest.TestCase):
             print(f">> {result.get()}")
 
 
+    def test_how_to_use_load_data_method_with_3_params_using_stack_LIST(self):
+        # Arrange
+        tfl = TextFileSource()
+        fname = "data.txt" # "C:\\tmp\\KeyboardHandler.txt"
+        stack = []  # using list as a stack
+
+        # Define line processor to push each line onto the stack
+        def line_processor(col, line):
+            col.append(line.strip())  # equivalent of Java's stack.push()
+            return col
+
+        # Act
+        result = tfl.load_data(fname, stack, line_processor)
+
+        # Print contents for demonstration (LIFO order)
+        print(">> Lines from stack:")
+        while result:
+            print(f">> {result.pop()}")  # LIFO behavior
+
+
 
 if __name__ == "__main__":
     unittest.main()
