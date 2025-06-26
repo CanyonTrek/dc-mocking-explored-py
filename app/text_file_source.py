@@ -9,7 +9,7 @@ class TextFileSource:
     the data is processed.
     """
 
-    def load_data(self, fname, line_processor):
+    def load_data(self, fname, line_processor=None):
         """
         Loads lines from the given file and applies the line_processor to each line.
 
@@ -20,6 +20,11 @@ class TextFileSource:
         Returns:
         - A list of processed lines.
         """
+        # If no processor is provided, use a default that appends each stripped line
+        if line_processor is None:
+            line_processor = lambda col, line: col + [line]
+
+
         lines = []
         try:
             with open(fname, "r", encoding="utf-8") as file:
